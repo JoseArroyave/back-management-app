@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "rm -rf dist && nest build && npm run copy-i18n && npm run copy-env && pm2 restart back-imagine",
+    "build": "rm -rf dist && nest build && npm run copy-env && pm2 restart back-imagine",
     "copy-env": "copyfiles .env dist/",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
