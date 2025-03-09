@@ -1,4 +1,4 @@
-import { IPayloadToken } from "../../config/auth/auth.interface";
+import { IPayloadToken } from "../../modules/auth/auth.interface";
 
 declare global {
   namespace Express {

@@ -18,7 +18,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: IPayloadToken) {
-    return { idUser: payload.sub, session: payload.session };
+    return { idUser: payload.sub, ...payload };
   }
 
   public decodeToken(token: string): IUseAuthToken {

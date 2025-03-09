@@ -31,7 +31,7 @@ export class AuthService {
 
     delete user.password;
 
-    const payload: IPayloadToken = { session: user, sub: user.idUser };
+    const payload: IPayloadToken = { user, sub: user.idUser };
     const token = await this.signJwt(payload);
 
     return token;
