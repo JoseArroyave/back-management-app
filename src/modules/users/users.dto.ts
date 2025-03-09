@@ -1,30 +1,25 @@
-import { IsNotEmpty, IsOptional, MinLength, IsString, IsEmail } from "class-validator";
+import { IsNotEmpty, IsOptional, MinLength, IsString, IsEmail, IsUUID } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class UsersDTO {
-  @ApiProperty()
-  @IsString()
+  @ApiProperty({ description: "Identificador único del usuario (UUID)" })
+  @IsUUID()
   @IsOptional()
-  idUser: number | null;
+  idUser: string | null;
 
-  @ApiProperty()
-  @MinLength(8)
+  @ApiProperty({ description: "Contraseña del usuario (mínimo 8 caracteres)" })
+  @MinLength(8, { message: "La contraseña debe tener al menos 8 caracteres" })
   @IsOptional()
   @IsString()
   password: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
+  @ApiProperty({ description: "Nombres del usuario" })
+  @IsNotEmpty({ message: "Los nombres son obligatorios" })
   @IsString()
   name: string;
 
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  lastName: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsEmail()
+  @ApiProperty({ description: "Correo electrónico del usuario" })
+  @IsNotEmpty({ message: "El email es obligatorio" })
+  @IsEmail({}, { message: "Debe ser un email válido" })
   email: string;
 }

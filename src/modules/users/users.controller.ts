@@ -1,7 +1,8 @@
 import { PublicAccess } from "../../common/decorators/public-access.decorator";
+import { Controller, Body, Post, Get, UseGuards, Query } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { Controller, Body, Post } from "@nestjs/common";
 import { UsersService } from "./users.service";
+import { AuthGuard } from "@nestjs/passport";
 import { UsersDTO } from "./users.dto";
 
 @ApiBearerAuth()
@@ -17,6 +18,9 @@ export class UsersController {
     return addedUser;
   }
 
-  // @UseGuards(JwtAuthGuard)
-
+  @Get("searchUsers")
+  @UseGuards(AuthGuard("jwt"))
+  public async searchUsers(@Query("query") query: string) {
+    return this.usersService.searchUsers(query);
+  }
 }
